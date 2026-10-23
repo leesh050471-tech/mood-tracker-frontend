@@ -24,10 +24,19 @@
 }
 
 body {
-  /* 하늘색 그라데이션 위에 뽀로로를 오른쪽 아래에 고정 (카드는 반투명이라 뒤가 은은하게 비침) */
-  background:
-    url("/pororo.png") right 4vw bottom 0 / auto min(70vh, 720px) no-repeat fixed,
-    linear-gradient(180deg, var(--sky-top), var(--sky-bottom)) fixed;
+  /* 하늘색 그라데이션 배경 (뽀로로는 아래 body::before 로 화면에 고정) */
+  background: linear-gradient(180deg, var(--sky-top), var(--sky-bottom)) fixed;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 뽀로로를 화면 오른쪽 아래에 고정 — background-attachment: fixed 는 모바일에서 무시되므로 fixed 레이어 사용
+   (카드는 반투명이라 뒤가 은은하게 비침) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url("/pororo.png") right 4vw bottom 0 / auto min(70vh, 720px) no-repeat;
 }
